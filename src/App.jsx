@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react'
 
-const API_URL = import.meta.env.VITE_API_URL || ''
-
 function App() {
   const [shops, setShops] = useState([])
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    fetch(`${API_URL}/api/v1/shops`)
+    fetch(`/api/v1/shops`)
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
         return res.json()
