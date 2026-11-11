@@ -1,0 +1,90 @@
+.registration-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  background: #f5f7fb;
+  color: #243047;
+}
+
+.registration-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 36px;
+  border-radius: 18px;
+  background: white;
+  box-shadow: 0 12px 40px rgba(20, 30, 60, 0.08);
+}
+
+.registration-logo {
+  color: #3158c9;
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+
+.registration-card h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.registration-description {
+  color: #667085;
+  margin-bottom: 28px;
+}
+
+.registration-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.registration-card label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.registration-card input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  font: inherit;
+  box-sizing: border-box;
+}
+
+.registration-card input:focus {
+  outline: 2px solid #3158c9;
+  outline-offset: 1px;
+}
+
+.registration-card button {
+  margin-top: 18px;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #3158c9;
+  color: white;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.registration-card button:hover {
+  background: #2546a6;
+}
+
+.registration-card button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.registration-error {
+  color: #b42318;
+}
+
+.registration-success {
+  color: #067647;
+}
