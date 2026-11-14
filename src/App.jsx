@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react'
+import LoginForm from './components/LoginForm.jsx'
+import { getToken, logout } from './auth.js'
 
 function App() {
   const [shops, setShops] = useState([])
   const [error, setError] = useState(null)
+  const [token, setToken] = useState(getToken())
 
   useEffect(() => {
     fetch(`/api/v1/shops`)
@@ -14,11 +17,23 @@ function App() {
       .catch((err) => setError(err.message))
   }, [])
 
+  function handleLogout() {
+    logout()
+    setToken(null)
+  }
+
   if (error) return <p>Erreur : {error}</p>
 
   return (
     <main>
       <h1>ShopLoc — Commerces partenaires</h1>
+      {token ? (
+        <p>
+          Vous êtes connecté. <button onClick={handleLogout}>Se déconnecter</button>
+        </p>
+      ) : (
+        <LoginForm onLogin={setToken} />
+      )}
       <ul>
         {shops.map((shop) => (
           <li key={shop.id}>
