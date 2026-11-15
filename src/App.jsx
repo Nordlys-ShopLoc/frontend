@@ -4,6 +4,7 @@ import ShopRegistrationForm from './components/ShopRegistrationForm.jsx'
 import LoginForm from './components/LoginForm.jsx'
 import RegistrationForm from './components/RegistrationForm.jsx'
 import InShopRegistrationForm from './components/InShopRegistrationForm.jsx'
+import PersonalDataForm from './components/PersonalDataForm.jsx'
 import { getRole, getToken, logout } from './auth.js'
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
             Vous êtes connecté. <button onClick={handleLogout}>Se déconnecter</button>
           </p>
           {getRole() === 'MERCHANT' && <InShopRegistrationForm />}
+          <PersonalDataForm onDeleted={handleLogout} />
         </>
       ) : (
         <>
