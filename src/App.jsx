@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import LoginForm from './components/LoginForm.jsx'
 import RegistrationForm from './components/RegistrationForm.jsx'
-import { getToken, logout } from './auth.js'
+import InShopRegistrationForm from './components/InShopRegistrationForm.jsx'
+import { getRole, getToken, logout } from './auth.js'
 
 function App() {
   const [shops, setShops] = useState([])
@@ -29,9 +30,12 @@ function App() {
     <main>
       <h1>ShopLoc — Commerces partenaires</h1>
       {token ? (
-        <p>
-          Vous êtes connecté. <button onClick={handleLogout}>Se déconnecter</button>
-        </p>
+        <>
+          <p>
+            Vous êtes connecté. <button onClick={handleLogout}>Se déconnecter</button>
+          </p>
+          {getRole() === 'MERCHANT' && <InShopRegistrationForm />}
+        </>
       ) : (
         <>
           <LoginForm onLogin={setToken} />
