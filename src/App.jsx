@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import LoginForm from './components/LoginForm.jsx'
+import RegistrationForm from './components/RegistrationForm.jsx'
 import { getToken, logout } from './auth.js'
 
 function App() {
@@ -32,7 +33,10 @@ function App() {
           Vous êtes connecté. <button onClick={handleLogout}>Se déconnecter</button>
         </p>
       ) : (
-        <LoginForm onLogin={setToken} />
+        <>
+          <LoginForm onLogin={setToken} />
+          <RegistrationForm />
+        </>
       )}
       <ul>
         {shops.map((shop) => (
