@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import PendingShops from './components/PendingShops.jsx'
+import ShopRegistrationForm from './components/ShopRegistrationForm.jsx'
 import LoginForm from './components/LoginForm.jsx'
 import RegistrationForm from './components/RegistrationForm.jsx'
 import InShopRegistrationForm from './components/InShopRegistrationForm.jsx'
@@ -51,6 +53,8 @@ function App() {
           </li>
         ))}
       </ul>
+      {getRole() === 'MERCHANT' && <ShopRegistrationForm />}
+      {getRole() === 'ADMIN' && <PendingShops />}
     </main>
   )
 }
