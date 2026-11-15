@@ -88,3 +88,12 @@
 .registration-success {
   color: #067647;
 }
+
+.registration-card textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  font: inherit;
+  box-sizing: border-box;
+}
