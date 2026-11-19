@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { login } from '../auth.js'
-import './LoginForm.css'
 
 function LoginForm({ onLogin }) {
   const [email, setEmail] = useState('')
@@ -18,19 +17,32 @@ function LoginForm({ onLogin }) {
   }
 
   return (
-    <form className="login-form" onSubmit={handleSubmit}>
-      <h2>Connexion</h2>
-      <label>
-        E-mail
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-      </label>
-      <label>
-        Mot de passe
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-      </label>
-      {error && <p className="login-error" role="alert">{error}</p>}
-      <button type="submit">Se connecter</button>
-    </form>
+    <section className="card">
+      <h3 className="card-title">Connexion</h3>
+      <p className="card-description">Déjà inscrit ? Connectez-vous avec votre adresse email.</p>
+
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="field">
+          <label htmlFor="loginEmail">Adresse email</label>
+          <input id="loginEmail" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        </div>
+
+        <div className="field">
+          <label htmlFor="loginPassword">Mot de passe</label>
+          <input
+            id="loginPassword"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+
+        {error && <p className="msg-error" role="alert">{error}</p>}
+
+        <button type="submit" className="btn btn-primary">Se connecter</button>
+      </form>
+    </section>
   )
 }
 

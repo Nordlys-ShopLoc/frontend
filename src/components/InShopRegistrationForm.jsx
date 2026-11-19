@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { getToken } from '../auth.js'
-import './RegistrationForm.css'
 
 const initialForm = {
   firstName: '',
@@ -67,34 +66,42 @@ export default function InShopRegistrationForm() {
   }
 
   return (
-    <section className="registration-card">
-      <h1>Inscrire un client</h1>
-      <p className="registration-description">
+    <section className="card">
+      <h3 className="card-title">Inscrire un client</h3>
+      <p className="card-description">
         Pour les clients qui n'utilisent pas l'application : une carte de fidélité leur est créée tout de suite.
       </p>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="shopFirstName">Prénom</label>
-        <input id="shopFirstName" name="firstName" value={form.firstName} onChange={handleChange} maxLength={80} required />
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="field">
+          <label htmlFor="shopFirstName">Prénom</label>
+          <input id="shopFirstName" name="firstName" value={form.firstName} onChange={handleChange} maxLength={80} required />
+        </div>
 
-        <label htmlFor="shopLastName">Nom</label>
-        <input id="shopLastName" name="lastName" value={form.lastName} onChange={handleChange} maxLength={80} required />
+        <div className="field">
+          <label htmlFor="shopLastName">Nom</label>
+          <input id="shopLastName" name="lastName" value={form.lastName} onChange={handleChange} maxLength={80} required />
+        </div>
 
-        <label htmlFor="shopEmail">Adresse email (facultatif)</label>
-        <input id="shopEmail" name="email" type="email" value={form.email} onChange={handleChange} maxLength={180} />
+        <div className="field">
+          <label htmlFor="shopEmail">Adresse email (facultatif)</label>
+          <input id="shopEmail" name="email" type="email" value={form.email} onChange={handleChange} maxLength={180} />
+        </div>
 
-        <label htmlFor="shopPhone">Téléphone (facultatif)</label>
-        <input id="shopPhone" name="phone" type="tel" value={form.phone} onChange={handleChange} maxLength={20} />
+        <div className="field">
+          <label htmlFor="shopPhone">Téléphone (facultatif)</label>
+          <input id="shopPhone" name="phone" type="tel" value={form.phone} onChange={handleChange} maxLength={20} />
+        </div>
 
-        {error && <p className="registration-error" role="alert">{error}</p>}
+        {error && <p className="msg-error" role="alert">{error}</p>}
 
         {qrCode && (
-          <p className="registration-success" role="status">
+          <p className="msg-success" role="status">
             Client inscrit ! Code de la carte à lui remettre : <strong>{qrCode}</strong>
           </p>
         )}
 
-        <button type="submit" disabled={loading}>
+        <button type="submit" className="btn btn-primary" disabled={loading}>
           {loading ? 'Inscription en cours...' : 'Inscrire le client'}
         </button>
       </form>
