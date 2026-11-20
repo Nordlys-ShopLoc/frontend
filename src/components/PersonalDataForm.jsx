@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { getToken } from '../auth.js'
-import './RegistrationForm.css'
 
 const URL = '/api/v1/accounts/me'
 
@@ -73,33 +72,53 @@ export default function PersonalDataForm({ onDeleted }) {
     else setError('Impossible de supprimer votre compte.')
   }
 
-  if (!form) return error ? <p className="registration-error">{error}</p> : <p>Chargement de vos données...</p>
+  if (!form) {
+    return (
+      <section className="card">
+        <h3 className="card-title">Mes données</h3>
+        {error ? <p className="msg-error" role="alert">{error}</p> : <p className="muted">Chargement de vos données...</p>}
+      </section>
+    )
+  }
 
   return (
-    <section className="registration-card">
-      <h1>Mes données</h1>
+    <section className="card">
+      <h3 className="card-title">Mes données</h3>
+      <p className="card-description">Consultez et modifiez les informations de votre compte.</p>
 
-      <form onSubmit={handleSave}>
-        <label htmlFor="meEmail">Adresse email (non modifiable)</label>
-        <input id="meEmail" value={form.email} disabled />
+      <form className="form" onSubmit={handleSave}>
+        <div className="field">
+          <label htmlFor="meEmail">Adresse email (non modifiable)</label>
+          <input id="meEmail" value={form.email} disabled />
+        </div>
 
-        <label htmlFor="meFirstName">Prénom</label>
-        <input id="meFirstName" name="firstName" value={form.firstName} onChange={handleChange} maxLength={80} required />
+        <div className="field">
+          <label htmlFor="meFirstName">Prénom</label>
+          <input id="meFirstName" name="firstName" value={form.firstName} onChange={handleChange} maxLength={80} required />
+        </div>
 
-        <label htmlFor="meLastName">Nom</label>
-        <input id="meLastName" name="lastName" value={form.lastName} onChange={handleChange} maxLength={80} required />
+        <div className="field">
+          <label htmlFor="meLastName">Nom</label>
+          <input id="meLastName" name="lastName" value={form.lastName} onChange={handleChange} maxLength={80} required />
+        </div>
 
-        <label htmlFor="mePhone">Téléphone</label>
-        <input id="mePhone" name="phone" type="tel" value={form.phone} onChange={handleChange} maxLength={20} />
+        <div className="field">
+          <label htmlFor="mePhone">Téléphone</label>
+          <input id="mePhone" name="phone" type="tel" value={form.phone} onChange={handleChange} maxLength={20} />
+        </div>
 
-        <label htmlFor="meLicensePlate">Plaque d'immatriculation</label>
-        <input id="meLicensePlate" name="licensePlate" value={form.licensePlate} onChange={handleChange} maxLength={16} />
+        <div className="field">
+          <label htmlFor="meLicensePlate">Plaque d'immatriculation</label>
+          <input id="meLicensePlate" name="licensePlate" value={form.licensePlate} onChange={handleChange} maxLength={16} />
+        </div>
 
-        {error && <p className="registration-error" role="alert">{error}</p>}
-        {message && <p className="registration-success" role="status">{message}</p>}
+        {error && <p className="msg-error" role="alert">{error}</p>}
+        {message && <p className="msg-success" role="status">{message}</p>}
 
-        <button type="submit">Enregistrer</button>
-        <button type="button" onClick={handleDelete}>Supprimer mon compte</button>
+        <div className="btn-row">
+          <button type="submit" className="btn btn-primary">Enregistrer</button>
+          <button type="button" className="btn btn-danger" onClick={handleDelete}>Supprimer mon compte</button>
+        </div>
       </form>
     </section>
   )

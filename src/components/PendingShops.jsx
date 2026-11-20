@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { getToken } from '../auth.js'
-import './RegistrationForm.css'
 
 function authHeaders() {
   return { Authorization: `Bearer ${getToken()}` }
@@ -42,22 +41,29 @@ export default function PendingShops() {
   }
 
   return (
-    <section className="registration-card">
-      <h1>Commerces en attente</h1>
-      <p className="registration-description">Acceptez ou refusez les demandes d'inscription des commerçants.</p>
+    <section className="card">
+      <h3 className="card-title">Commerces en attente</h3>
+      <p className="card-description">Acceptez ou refusez les demandes d'inscription des commerçants.</p>
 
-      {error && <p className="registration-error" role="alert">{error}</p>}
-      {!error && shops.length === 0 && <p>Aucune demande en attente.</p>}
+      {error && <p className="msg-error" role="alert">{error}</p>}
+      {!error && shops.length === 0 && <p className="muted">Aucune demande en attente.</p>}
 
-      <ul>
+      <ul className="list">
         {shops.map((shop) => (
-          <li key={shop.id}>
-            <strong>{shop.name}</strong> — {shop.category}
-            <br />
-            {shop.address}
-            {shop.description && <p>{shop.description}</p>}
-            <button onClick={() => decide(shop.id, 'approve')}>Accepter</button>{' '}
-            <button onClick={() => decide(shop.id, 'reject')}>Refuser</button>
+          <li className="list-item" key={shop.id}>
+            <div>
+              <p className="list-item-title">{shop.name}</p>
+              <p className="muted">{shop.category} · {shop.address}</p>
+              {shop.description && <p className="muted">{shop.description}</p>}
+            </div>
+            <div className="btn-row">
+              <button type="button" className="btn btn-primary btn-small" onClick={() => decide(shop.id, 'approve')}>
+                Accepter
+              </button>
+              <button type="button" className="btn btn-secondary btn-small" onClick={() => decide(shop.id, 'reject')}>
+                Refuser
+              </button>
+            </div>
           </li>
         ))}
       </ul>

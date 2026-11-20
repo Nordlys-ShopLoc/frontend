@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { getToken } from '../auth.js'
-import './RegistrationForm.css'
 
 const initialForm = { name: '', address: '', category: '', description: '' }
 
@@ -54,36 +53,44 @@ export default function ShopRegistrationForm() {
   }
 
   return (
-    <section className="registration-card">
-      <h1>Inscrire mon commerce</h1>
-      <p className="registration-description">
+    <section className="card">
+      <h3 className="card-title">Inscrire mon commerce</h3>
+      <p className="card-description">
         Votre commerce apparaîtra dans la liste des partenaires après validation par l'administrateur ShopLoc.
       </p>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="shopName">Nom du commerce</label>
-        <input id="shopName" name="name" value={form.name} onChange={handleChange} maxLength={120} required />
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="field">
+          <label htmlFor="shopName">Nom du commerce</label>
+          <input id="shopName" name="name" value={form.name} onChange={handleChange} maxLength={120} required />
+        </div>
 
-        <label htmlFor="shopAddress">Adresse</label>
-        <input id="shopAddress" name="address" value={form.address} onChange={handleChange} maxLength={255} required />
+        <div className="field">
+          <label htmlFor="shopAddress">Adresse</label>
+          <input id="shopAddress" name="address" value={form.address} onChange={handleChange} maxLength={255} required />
+        </div>
 
-        <label htmlFor="shopCategory">Catégorie</label>
-        <input id="shopCategory" name="category" value={form.category} onChange={handleChange} maxLength={60}
-               placeholder="Boulangerie, Café…" required />
+        <div className="field">
+          <label htmlFor="shopCategory">Catégorie</label>
+          <input id="shopCategory" name="category" value={form.category} onChange={handleChange} maxLength={60}
+                 placeholder="Boulangerie, Café…" required />
+        </div>
 
-        <label htmlFor="shopDescription">Description (facultatif)</label>
-        <textarea id="shopDescription" name="description" value={form.description} onChange={handleChange}
-                  maxLength={1000} rows={4} />
+        <div className="field">
+          <label htmlFor="shopDescription">Description (facultatif)</label>
+          <textarea id="shopDescription" name="description" value={form.description} onChange={handleChange}
+                    maxLength={1000} rows={4} />
+        </div>
 
-        {error && <p className="registration-error" role="alert">{error}</p>}
+        {error && <p className="msg-error" role="alert">{error}</p>}
 
         {success && (
-          <p className="registration-success" role="status">
+          <p className="msg-success" role="status">
             Demande envoyée ! Votre commerce est en attente de validation.
           </p>
         )}
 
-        <button type="submit" disabled={loading}>
+        <button type="submit" className="btn btn-primary" disabled={loading}>
           {loading ? 'Envoi en cours...' : 'Envoyer la demande'}
         </button>
       </form>

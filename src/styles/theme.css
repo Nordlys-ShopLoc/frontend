@@ -1,0 +1,63 @@
+/* ShopLoc theme: colours, font and base styles (charte front-end, part 3) */
+:root {
+  /* interface colours */
+  --color-primary: #6c5ce7;
+  --color-primary-hover: #5a4fcf;
+  --color-text: #2d3142;
+  --color-text-secondary: #6b7280;
+  --color-border: #e2e5ee;
+  --color-background: #f6f7fb;
+  --color-surface: #ffffff;
+  --color-error: #c62828;
+  --color-success: #0f7b5f;
+  --color-hint: #9aa0ad;
+
+  /* decoration colours: shapes and illustrations only, never text */
+  --color-decor-teal: #21b6c6;
+  --color-decor-cyan: #3fd9f5;
+  --color-decor-coral: #e8505b;
+  --color-decor-yellow: #ffc542;
+  --color-decor-mint: #2ec4a5;
+
+  --font: 'Montserrat', system-ui, sans-serif;
+  --radius-field: 10px;
+  --radius-card: 16px;
+  --shadow-card: 0 10px 30px rgba(45, 49, 66, 0.08);
+  --focus-ring: 0 0 0 3px rgba(108, 92, 231, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-background);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.2;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--color-primary);
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+img {
+  max-width: 100%;
+}

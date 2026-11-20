@@ -1,63 +1,64 @@
-import { useEffect, useState } from 'react'
-import PendingShops from './components/PendingShops.jsx'
-import ShopRegistrationForm from './components/ShopRegistrationForm.jsx'
+import { useState } from 'react'
+import Header from './components/Header.jsx'
+import Hero from './components/Hero.jsx'
+import ShopList from './components/ShopList.jsx'
 import LoginForm from './components/LoginForm.jsx'
 import RegistrationForm from './components/RegistrationForm.jsx'
 import InShopRegistrationForm from './components/InShopRegistrationForm.jsx'
+import ShopRegistrationForm from './components/ShopRegistrationForm.jsx'
+import PendingShops from './components/PendingShops.jsx'
 import PersonalDataForm from './components/PersonalDataForm.jsx'
 import { getRole, getToken, logout } from './auth.js'
 
-function App() {
-  const [shops, setShops] = useState([])
-  const [error, setError] = useState(null)
-  const [token, setToken] = useState(getToken())
+const SPACE_TITLES = {
+  CLIENT: 'Espace client',
+  MERCHANT: 'Espace commerçant',
+  ADMIN: 'Espace administrateur',
+}
 
-  useEffect(() => {
-    fetch(`/api/v1/shops`)
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`)
-        return res.json()
-      })
-      .then(setShops)
-      .catch((err) => setError(err.message))
-  }, [])
+function App() {
+  const [token, setToken] = useState(getToken())
+  const role = token ? getRole() : null
 
   function handleLogout() {
     logout()
     setToken(null)
   }
 
-  if (error) return <p>Erreur : {error}</p>
-
   return (
-    <main>
-      <h1>ShopLoc — Commerces partenaires</h1>
-      {token ? (
-        <>
-          <p>
-            Vous êtes connecté. <button onClick={handleLogout}>Se déconnecter</button>
-          </p>
-          {getRole() === 'MERCHANT' && <InShopRegistrationForm />}
-          <PersonalDataForm onDeleted={handleLogout} />
-        </>
-      ) : (
-        <>
-          <LoginForm onLogin={setToken} />
-          <RegistrationForm />
-        </>
-      )}
-      <ul>
-        {shops.map((shop) => (
-          <li key={shop.id}>
-            <strong>{shop.name}</strong> — {shop.category}
-            <br />
-            {shop.address}
-          </li>
-        ))}
-      </ul>
-      {getRole() === 'MERCHANT' && <ShopRegistrationForm />}
-      {getRole() === 'ADMIN' && <PendingShops />}
-    </main>
+    <>
+      <Header role={role} onLogout={handleLogout} />
+
+      <main className="page" id="accueil">
+        <Hero loggedIn={Boolean(token)} />
+        <ShopList />
+
+        {token ? (
+          <section className="section" id="mon-espace">
+            <h2 className="page-title">{SPACE_TITLES[role] || 'Mon espace'}</h2>
+            <p className="page-subtitle">Retrouvez ici tout ce que vous pouvez faire avec votre compte.</p>
+            {/* One line per screen, inside the grid of its role */}
+            <div className="grid">
+              {role === 'MERCHANT' && <ShopRegistrationForm />}
+              {role === 'MERCHANT' && <InShopRegistrationForm />}
+              {role === 'ADMIN' && <PendingShops />}
+              <PersonalDataForm onDeleted={handleLogout} />
+            </div>
+          </section>
+        ) : (
+          <section className="section" id="connexion">
+            <h2 className="page-title">Mon compte</h2>
+            <p className="page-subtitle">Connectez-vous ou créez votre compte pour obtenir votre carte de fidélité.</p>
+            <div className="grid">
+              <LoginForm onLogin={setToken} />
+              <RegistrationForm />
+            </div>
+          </section>
+        )}
+      </main>
+
+      <footer className="footer">ShopLoc · projet Nordlys · Université de Lille</footer>
+    </>
   )
 }
 
