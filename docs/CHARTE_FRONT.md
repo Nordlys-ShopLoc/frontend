@@ -36,12 +36,13 @@ src/
 ├── styles/
 │   ├── theme.css     variables de couleur, typographie            (à venir)
 │   └── ui.css        classes communes (card, btn, msg…)          (à venir)
-└── components/       un fichier .jsx par écran ou bloc d'écran
+├── components/       un fichier .jsx par écran ou bloc d'écran
+└── pages/            une page par adresse, qui assemble des composants
 ```
 
 - `auth.js` est le seul fichier qui lit ou écrit le jeton dans le `sessionStorage`. *(En place)*
 - `App.jsx` n'assemble que des composants ; pas de logique métier ni d'appel API, sauf la liste publique des commerces.
-- Quand l'application aura plusieurs pages, on ajoutera `react-router` et un dossier `pages/`, après accord de l'équipe.
+- Une page par adresse dans `src/pages/` ; `App.jsx` ne contient que les routes (`react-router`, socle M2).
 
 ### Nommage
 
@@ -182,17 +183,26 @@ L'application a deux types de pages : la page d'accueil, avec son grand titre, s
 | Responsive | Sous 640 px : une colonne, titres et boutons centrés, boutons empilés, navigation dans le menu ≡ ; pas de largeur fixe hors `max-width` | À venir |
 | Pas de défilement horizontal | Vérifié à 375 px de large avant chaque PR | À venir |
 
-### Ajouter un écran dans App.jsx
+### Ajouter un écran
 
-`App.jsx` est modifié par presque toutes les user stories : c'est la première source de conflits du front. On y ajoute le minimum, sans réécrire le reste du fichier :
+Chaque adresse a sa page dans `src/pages/` ; `App.jsx` ne contient que l'en-tête et la liste des routes (`react-router`, ajouté avec le socle M2). Pour ajouter un écran, on ajoute une ligne dans la grille de la page de son rôle, sans réécrire le reste :
+
+| Rôle | Page | Adresse |
+| --- | --- | --- |
+| Tous | `HomePage.jsx`, `ShopPage.jsx` | `/`, `/commerces/:id` |
+| Connecté | `AccountPage.jsx` | `/mon-compte` |
+| Commerçant | `MerchantSpacePage.jsx` | `/espace-commercant` |
+| Administrateur | `AdminPage.jsx` | `/admin` |
 
 ```jsx
-// 1. une ligne d'import
-import PendingShops from './components/PendingShops.jsx'
+// 1. une ligne d'import dans la page
+import OpeningHoursForm from '../components/OpeningHoursForm.jsx'
 
-// 2. une ligne d'affichage, juste avant </main>
-{getRole() === 'ADMIN' && <PendingShops />}
+// 2. une ligne dans la grille de la page
+<OpeningHoursForm />
 ```
+
+Les pages réservées passent par `RequireRole`, qui renvoie vers `/connexion` ou l'accueil : c'est un confort d'affichage, la sécurité reste côté serveur.
 
 ## 5. Règles de développement React
 

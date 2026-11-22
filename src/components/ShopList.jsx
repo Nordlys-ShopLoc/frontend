@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router'
 import { apiFetch, errorMessage } from '../api.js'
 
 // Public list of the partner shops, visible by everyone
@@ -31,7 +32,7 @@ export default function ShopList() {
         {shops.map((shop) => (
           <article className="card" key={shop.id}>
             <span className="badge">{shop.category}</span>
-            <h3 className="card-title">{shop.name}</h3>
+            <h3 className="card-title"><Link to={`/commerces/${shop.id}`}>{shop.name}</Link></h3>
             <p className="muted">{shop.address}</p>
           </article>
         ))}
