@@ -1,0 +1,39 @@
+.loyalty-card {
+  text-align: center;
+}
+
+.loyalty-card-content {
+  padding: 24px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+}
+
+.loyalty-card-brand {
+  color: var(--color-primary);
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.loyalty-card-content .badge {
+  margin-top: 16px;
+}
+
+.card-qr {
+  margin-top: 24px;
+}
+
+.card-qr svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.card-qr p {
+  margin-top: 12px;
+  overflow-wrap: anywhere;
+}
+
+.card-instruction {
+  margin-top: 20px;
+}

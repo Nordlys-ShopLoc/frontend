@@ -8,6 +8,7 @@ import InShopRegistrationForm from './components/InShopRegistrationForm.jsx'
 import ShopRegistrationForm from './components/ShopRegistrationForm.jsx'
 import PendingShops from './components/PendingShops.jsx'
 import PersonalDataForm from './components/PersonalDataForm.jsx'
+import MyLoyaltyCard from './components/MyLoyaltyCard.jsx'
 import { getRole, getToken, logout } from './auth.js'
 
 const SPACE_TITLES = {
@@ -39,6 +40,7 @@ function App() {
             <p className="page-subtitle">Retrouvez ici tout ce que vous pouvez faire avec votre compte.</p>
             {/* One line per screen, inside the grid of its role */}
             <div className="grid">
+              {role === 'CLIENT' && <MyLoyaltyCard />}
               {role === 'MERCHANT' && <ShopRegistrationForm />}
               {role === 'MERCHANT' && <InShopRegistrationForm />}
               {role === 'ADMIN' && <PendingShops />}
