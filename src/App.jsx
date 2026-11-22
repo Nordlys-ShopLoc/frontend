@@ -1,62 +1,52 @@
 import { useState } from 'react'
+import { Route, Routes, useNavigate } from 'react-router'
 import Header from './components/Header.jsx'
-import Hero from './components/Hero.jsx'
-import ShopList from './components/ShopList.jsx'
-import LoginForm from './components/LoginForm.jsx'
-import RegistrationForm from './components/RegistrationForm.jsx'
-import InShopRegistrationForm from './components/InShopRegistrationForm.jsx'
-import ShopRegistrationForm from './components/ShopRegistrationForm.jsx'
-import PendingShops from './components/PendingShops.jsx'
-import PersonalDataForm from './components/PersonalDataForm.jsx'
-import MyLoyaltyCard from './components/MyLoyaltyCard.jsx'
+import RequireRole from './components/RequireRole.jsx'
+import HomePage from './pages/HomePage.jsx'
+import ShopPage from './pages/ShopPage.jsx'
+import LoginPage from './pages/LoginPage.jsx'
+import RegisterPage from './pages/RegisterPage.jsx'
+import AccountPage from './pages/AccountPage.jsx'
+import MerchantSpacePage from './pages/MerchantSpacePage.jsx'
+import AdminPage from './pages/AdminPage.jsx'
+import NotFoundPage from './pages/NotFoundPage.jsx'
 import { getRole, getToken, logout } from './auth.js'
-
-const SPACE_TITLES = {
-  CLIENT: 'Espace client',
-  MERCHANT: 'Espace commerçant',
-  ADMIN: 'Espace administrateur',
-}
 
 function App() {
   const [token, setToken] = useState(getToken())
   const role = token ? getRole() : null
+  const navigate = useNavigate()
 
   function handleLogout() {
     logout()
     setToken(null)
+    navigate('/')
   }
 
   return (
     <>
       <Header role={role} onLogout={handleLogout} />
 
-      <main className="page" id="accueil">
-        <Hero loggedIn={Boolean(token)} />
-        <ShopList />
-
-        {token ? (
-          <section className="section" id="mon-espace">
-            <h2 className="page-title">{SPACE_TITLES[role] || 'Mon espace'}</h2>
-            <p className="page-subtitle">Retrouvez ici tout ce que vous pouvez faire avec votre compte.</p>
-            {/* One line per screen, inside the grid of its role */}
-            <div className="grid">
-              {role === 'CLIENT' && <MyLoyaltyCard />}
-              {role === 'MERCHANT' && <ShopRegistrationForm />}
-              {role === 'MERCHANT' && <InShopRegistrationForm />}
-              {role === 'ADMIN' && <PendingShops />}
-              <PersonalDataForm onDeleted={handleLogout} />
-            </div>
-          </section>
-        ) : (
-          <section className="section" id="connexion">
-            <h2 className="page-title">Mon compte</h2>
-            <p className="page-subtitle">Connectez-vous ou créez votre compte pour obtenir votre carte de fidélité.</p>
-            <div className="grid">
-              <LoginForm onLogin={setToken} />
-              <RegistrationForm />
-            </div>
-          </section>
-        )}
+      <main className="page">
+        <Routes>
+          <Route path="/" element={<HomePage loggedIn={Boolean(token)} />} />
+          <Route path="/commerces/:id" element={<ShopPage />} />
+          <Route path="/connexion" element={<LoginPage onLogin={setToken} />} />
+          <Route path="/inscription" element={<RegisterPage />} />
+          <Route
+            path="/mon-compte"
+            element={<RequireRole token={token}><AccountPage role={role} onDeleted={handleLogout} /></RequireRole>}
+          />
+          <Route
+            path="/espace-commercant"
+            element={<RequireRole token={token} roles={['MERCHANT']}><MerchantSpacePage /></RequireRole>}
+          />
+          <Route
+            path="/admin"
+            element={<RequireRole token={token} roles={['ADMIN']}><AdminPage /></RequireRole>}
+          />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </main>
 
       <footer className="footer">ShopLoc · projet Nordlys · Université de Lille</footer>
