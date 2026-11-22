@@ -1,0 +1,31 @@
+.product-search {
+  max-width: 400px;
+  margin-bottom: 24px;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.product-card .card-title,
+.product-card .card-description {
+  margin-bottom: 0;
+}
+
+.product-price {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.product-out-of-stock {
+  background: var(--color-background);
+  opacity: 0.65;
+}
+
+.product-out-of-stock .badge {
+  align-self: flex-start;
+  opacity: 1;
+}
