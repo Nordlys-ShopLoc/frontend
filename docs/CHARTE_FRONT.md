@@ -335,3 +335,4 @@ PR « base commune », ouverte par la responsable front-office une fois les PR f
 5. Fonction `apiFetch()` et messages d'erreur communs — `src/api.js`
 6. Police Montserrat et illustrations — `package.json` (`@fontsource/montserrat`), `src/assets/`
 7. Langue et titre — `index.html`
+

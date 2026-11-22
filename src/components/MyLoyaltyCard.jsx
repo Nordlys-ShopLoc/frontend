@@ -32,9 +32,21 @@ function MyLoyaltyCard() {
     }
   }, [])
 
-  if (loading) return <p>Chargement de votre carte de fidélité...</p>
-  if (error) return <p role="alert">{error}</p>
-  if (!card) return <p>Aucune carte de fidélité disponible.</p>
+  if (loading || error || !card) {
+    return (
+      <section className="card">
+        <h3 className="card-title">Ma carte de fidélité</h3>
+
+        {loading ? (
+          <p className="muted">Chargement de votre carte de fidélité...</p>
+        ) : error ? (
+          <p className="msg-error" role="alert">{error}</p>
+        ) : (
+          <p className="muted">Aucune carte de fidélité disponible.</p>
+        )}
+      </section>
+    )
+  }
 
   return <LoyaltyCardView card={card} />
 }

@@ -10,13 +10,13 @@ function LoyaltyCardView({ card }) {
 
   return (
     <section className="card loyalty-card">
-      <h2 className="card-title">Ma carte de fidélité</h2>
+      <h3 className="card-title">Ma carte de fidélité</h3>
       <p className="card-description">
         Retrouvez votre carte de fidélité ShopLoc.
       </p>
 
       <div className="loyalty-card-content">
-        <h3>ShopLoc</h3>
+        <p className="loyalty-card-brand">ShopLoc</p>
         <p className="muted">Carte de fidélité</p>
 
         <p className={active ? 'badge badge-success' : 'badge badge-error'}>

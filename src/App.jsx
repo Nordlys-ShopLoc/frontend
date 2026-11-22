@@ -41,7 +41,7 @@ function App() {
             {/* One line per screen, inside the grid of its role */}
             <div className="grid">
               {role === 'CLIENT' && <MyLoyaltyCard />}
-            {role === 'MERCHANT' && <ShopRegistrationForm />}
+              {role === 'MERCHANT' && <ShopRegistrationForm />}
               {role === 'MERCHANT' && <InShopRegistrationForm />}
               {role === 'ADMIN' && <PendingShops />}
               <PersonalDataForm onDeleted={handleLogout} />
