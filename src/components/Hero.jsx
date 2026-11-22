@@ -1,4 +1,5 @@
 import illustration from '../assets/shop-illustration.svg'
+import { Link } from 'react-router'
 
 // Top of the home page: title, two actions and the illustration
 export default function Hero({ loggedIn }) {
@@ -16,9 +17,9 @@ export default function Hero({ loggedIn }) {
         </p>
         <div className="hero-actions">
           {loggedIn ? (
-            <a className="btn btn-secondary" href="#mon-espace">Mon espace</a>
+            <Link className="btn btn-secondary" to="/mon-compte">Mon espace</Link>
           ) : (
-            <a className="btn btn-secondary" href="#connexion">Créer mon compte</a>
+            <Link className="btn btn-secondary" to="/inscription">Créer mon compte</Link>
           )}
           <span className="hero-or">ou</span>
           <a className="btn btn-primary" href="#commerces">Voir les commerces</a>
