@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './RegistrationForm.css'
 
 const initialForm = {
   firstName: '',
@@ -30,7 +29,7 @@ export default function RegistrationForm() {
     }
 
     if (form.password.length < 8) {
-      setError('Le mot de passe doit contenir au moins 8 caracteres.')
+      setError('Le mot de passe doit contenir au moins 8 caractères.')
       return
     }
 
@@ -50,14 +49,14 @@ export default function RegistrationForm() {
 
       if (!response.ok) {
         if (response.status === 409) {
-          throw new Error('Cette adresse email est deja utilisee.')
+          throw new Error('Cette adresse email est déjà utilisée.')
         }
 
         if (response.status === 400) {
-          throw new Error('Veuillez verifier les informations saisies.')
+          throw new Error('Veuillez vérifier les informations saisies.')
         }
 
-        throw new Error("Impossible de creer le compte pour le moment.")
+        throw new Error("Impossible de créer le compte pour le moment.")
       }
 
       setSuccess(true)
@@ -70,15 +69,12 @@ export default function RegistrationForm() {
   }
 
   return (
-    <main className="registration-page">
-      <section className="registration-card">
-        <div className="registration-logo">ShopLoc</div>
-        <h1>Créer mon compte</h1>
-        <p className="registration-description">
-          Inscrivez-vous pour obtenir votre carte de fidélité numérique.
-        </p>
+    <section className="card">
+      <h3 className="card-title">Créer mon compte</h3>
+      <p className="card-description">Inscrivez-vous pour obtenir votre carte de fidélité numérique.</p>
 
-        <form onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="field">
           <label htmlFor="firstName">Prénom</label>
           <input
             id="firstName"
@@ -89,7 +85,9 @@ export default function RegistrationForm() {
             maxLength={80}
             required
           />
+        </div>
 
+        <div className="field">
           <label htmlFor="lastName">Nom</label>
           <input
             id="lastName"
@@ -100,7 +98,9 @@ export default function RegistrationForm() {
             maxLength={80}
             required
           />
+        </div>
 
+        <div className="field">
           <label htmlFor="email">Adresse email</label>
           <input
             id="email"
@@ -112,7 +112,9 @@ export default function RegistrationForm() {
             maxLength={180}
             required
           />
+        </div>
 
+        <div className="field">
           <label htmlFor="password">Mot de passe</label>
           <input
             id="password"
@@ -124,20 +126,20 @@ export default function RegistrationForm() {
             minLength={8}
             required
           />
+        </div>
 
-          {error && <p className="registration-error" role="alert">{error}</p>}
+        {error && <p className="msg-error" role="alert">{error}</p>}
 
-          {success && (
-            <p className="registration-success" role="status">
-              Votre compte et votre carte de fidélité ont été créés !
-            </p>
-          )}
+        {success && (
+          <p className="msg-success" role="status">
+            Votre compte et votre carte de fidélité ont été créés !
+          </p>
+        )}
 
-          <button type="submit" disabled={loading}>
-            {loading ? 'Création en cours...' : "S'inscrire"}
-          </button>
-        </form>
-      </section>
-    </main>
+        <button type="submit" className="btn btn-primary" disabled={loading}>
+          {loading ? 'Création en cours...' : "S'inscrire"}
+        </button>
+      </form>
+    </section>
   )
 }

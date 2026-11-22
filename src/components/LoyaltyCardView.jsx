@@ -1,36 +1,43 @@
 import { QRCodeSVG } from 'qrcode.react'
 import './LoyaltyCardView.css'
 
-// affiche la carte de fidelite du client avec son qr code
 function LoyaltyCardView({ card }) {
   if (!card) {
-    return <p>Aucune carte de fidelite disponible.</p>
+    return <p className="muted">Aucune carte de fidélité disponible.</p>
   }
 
   const active = card.status === 'ACTIVE'
 
   return (
-    <section className="loyalty-card">
-      <h2>Ma carte de fidelite</h2>
+    <section className="card loyalty-card">
+      <h2 className="card-title">Ma carte de fidélité</h2>
+      <p className="card-description">
+        Retrouvez votre carte de fidélité ShopLoc.
+      </p>
+
       <div className="loyalty-card-content">
         <h3>ShopLoc</h3>
-        <p>Carte de fidelite</p>
-        <p className={active ? 'card-active' : 'card-blocked'}>
-          {active ? 'Carte active' : 'Carte bloquee'}
+        <p className="muted">Carte de fidélité</p>
+
+        <p className={active ? 'badge badge-success' : 'badge badge-error'}>
+          {active ? 'Carte active' : 'Carte bloquée'}
         </p>
 
         {active && card.qrCode ? (
           <div className="card-qr">
             <QRCodeSVG value={card.qrCode} size={190} />
-            <p>{card.qrCode}</p>
+            <p className="muted">{card.qrCode}</p>
           </div>
         ) : (
-          <p>Cette carte ne peut pas etre utilisee.</p>
+          <p className="muted">Cette carte ne peut pas être utilisée.</p>
         )}
       </div>
-      <p className="card-instruction">
-        Presentez ce QR code au commercant lors de votre achat.
-      </p>
+
+      {active && card.qrCode && (
+        <p className="card-instruction muted">
+          Présentez ce QR code au commerçant lors de votre achat.
+        </p>
+      )}
     </section>
   )
 }

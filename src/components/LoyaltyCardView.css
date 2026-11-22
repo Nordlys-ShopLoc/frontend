@@ -1,49 +1,39 @@
 .loyalty-card {
-  max-width: 440px;
-  margin: 30px auto;
-  padding: 24px;
   text-align: center;
-  font-family: Arial, sans-serif;
 }
 
 .loyalty-card-content {
-  padding: 30px 20px;
-  border-radius: 18px;
-  background: white;
-  color: #222;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+  padding: 24px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
 }
 
 .loyalty-card-content h3 {
-  color: #285fba;
-  font-size: 28px;
+  color: var(--color-primary);
+  font-size: 24px;
+  margin-bottom: 8px;
 }
 
-.card-active {
-  color: green;
-  font-weight: bold;
-}
-
-.card-blocked {
-  color: red;
-  font-weight: bold;
+.loyalty-card-content .badge {
+  margin-top: 16px;
 }
 
 .card-qr {
-  margin-top: 25px;
+  margin-top: 24px;
 }
 
 .card-qr svg {
   display: block;
-  margin: auto;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
 }
 
 .card-qr p {
-  font-size: 12px;
+  margin-top: 12px;
   overflow-wrap: anywhere;
 }
 
 .card-instruction {
   margin-top: 20px;
-  font-size: 14px;
 }

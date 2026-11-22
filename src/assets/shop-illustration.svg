@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 400" role="img">
+  <!-- background blobs -->
+  <path d="M120 330 C60 300 70 210 140 190 C200 172 220 120 290 130 C370 142 360 220 420 240 C480 260 470 340 400 350 Z" fill="#e8505b"/>
+  <path d="M60 250 C40 200 80 150 130 160 C170 168 175 220 150 250 C130 275 75 290 60 250 Z" fill="#21b6c6"/>
+  <ellipse cx="440" cy="330" rx="48" ry="40" fill="#ffc542"/>
+  <!-- shop -->
+  <rect x="200" y="170" width="170" height="160" fill="#ffffff"/>
+  <rect x="200" y="170" width="170" height="14" fill="#2d3142"/>
+  <g>
+    <path d="M190 184 h190 v34 h-190 z" fill="#6c5ce7"/>
+    <path d="M190 184 h27 v34 h-27 z M244 184 h27 v34 h-27 z M298 184 h27 v34 h-27 z M352 184 h28 v34 h-28 z" fill="#ffffff"/>
+    <path d="M190 218 q13.5 14 27 0 q13.5 14 27 0 q13.5 14 27 0 q13.5 14 27 0 q13.5 14 27 0 q13.5 14 27 0 q14 14 28 0 z" fill="#6c5ce7"/>
+  </g>
+  <rect x="216" y="248" width="66" height="50" rx="4" fill="#bff0f5"/>
+  <rect x="300" y="244" width="52" height="86" rx="4" fill="#2d3142"/>
+  <circle cx="342" cy="290" r="3.5" fill="#ffc542"/>
+  <rect x="200" y="326" width="170" height="6" fill="#2d3142"/>
+  <!-- shopping bag with pin -->
+  <path d="M396 258 h64 l6 74 h-76 z" fill="#2e4fae"/>
+  <path d="M412 258 v-10 a16 16 0 0 1 32 0 v10" fill="none" stroke="#2d3142" stroke-width="5"/>
+  <path d="M428 276 a13 13 0 0 1 13 13 c0 10 -13 22 -13 22 s-13 -12 -13 -22 a13 13 0 0 1 13 -13 z" fill="#ffffff"/>
+  <circle cx="428" cy="289" r="4.5" fill="#2e4fae"/>
+  <!-- plants -->
+  <path d="M150 340 C130 300 120 280 128 250 C150 270 160 300 150 340 Z" fill="#2ec4a5"/>
+  <path d="M158 340 C170 300 190 284 214 278 C206 306 186 326 158 340 Z" fill="#16967f"/>
+  <path d="M140 342 C112 322 96 306 92 284 C118 290 136 310 140 342 Z" fill="#16967f"/>
+  <!-- floating cards -->
+  <g transform="translate(110 70)">
+    <rect width="58" height="40" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="2"/>
+    <path d="M16 13 h5 l5 14 h14 l4 -10 h-20" fill="none" stroke="#6c5ce7" stroke-width="2.5" stroke-linejoin="round"/>
+    <circle cx="28" cy="31" r="2.2" fill="#6c5ce7"/><circle cx="38" cy="31" r="2.2" fill="#6c5ce7"/>
+  </g>
+  <g transform="translate(400 90)">
+    <rect width="62" height="44" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="2"/>
+    <path d="M31 33 C18 24 18 13 25 12 C29 11 31 15 31 16 C31 15 33 11 37 12 C44 13 44 24 31 33 Z" fill="#e8505b"/>
+  </g>
+  <g transform="translate(250 64)">
+    <rect width="96" height="58" rx="8" fill="#ffffff" stroke="#2d3142" stroke-width="2"/>
+    <rect x="10" y="12" width="44" height="7" rx="3.5" fill="#6c5ce7"/>
+    <rect x="10" y="26" width="64" height="5" rx="2.5" fill="#d7dbe6"/>
+    <rect x="10" y="36" width="50" height="5" rx="2.5" fill="#d7dbe6"/>
+    <circle cx="80" cy="16" r="9" fill="#ffc542"/>
+    <path d="M76 16 l3 3 l6 -6" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(176 120)">
+    <rect width="34" height="26" rx="3" fill="#e8505b"/>
+    <text x="17" y="19" font-family="Montserrat, sans-serif" font-size="15" font-weight="600" fill="#ffffff" text-anchor="middle">€</text>
+  </g>
+  <!-- rings -->
+  <circle cx="70" cy="110" r="22" fill="none" stroke="#3fd9f5" stroke-width="8"/>
+  <circle cx="486" cy="200" r="14" fill="none" stroke="#3fd9f5" stroke-width="6"/>
+</svg>

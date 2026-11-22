@@ -12,3 +12,7 @@ import { getToken } from './auth.js'
 
 fetch('/api/v1/cards/me', { headers: { Authorization: `Bearer ${getToken()}` } })
 ```
+
+## Charte front-end
+
+Les règles du code front (couleurs, composants, appels API, accessibilité, processus de PR) sont dans [docs/CHARTE_FRONT.md](docs/CHARTE_FRONT.md). À lire avant votre première PR front.

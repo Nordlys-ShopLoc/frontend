@@ -22,3 +22,11 @@ export function getToken() {
 export function logout() {
   sessionStorage.removeItem(TOKEN_KEY)
 }
+
+// Role of the logged-in user (CLIENT, MERCHANT, ADMIN...), read from the token
+export function getRole() {
+  const token = getToken()
+  if (!token) return null
+  const payload = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')
+  return JSON.parse(atob(payload)).role
+}
