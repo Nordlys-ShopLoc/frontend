@@ -1,0 +1,9 @@
+/* The cards of the merchant space are narrow: the buttons go under the article */
+.product-item {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.product-item .badge {
+  margin-top: 6px;
+}
