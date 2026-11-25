@@ -300,7 +300,7 @@ Objectif : niveau AA des WCAG 2.1 sur les écrans livrés.
 | Navigation au clavier | Tout se fait avec Tab et Entrée ; focus visible (bordure violette et halo) | En place |
 | Vrais boutons | `<button>` pour une action, `type="button"` s'il n'envoie pas le formulaire ; jamais un `div` cliquable | En place |
 | Langue et titre | `<html lang="fr">` et `<title>ShopLoc</title>` dans `index.html` | À venir |
-| Hiérarchie des titres | Un seul `h1` par page (le titre d'accueil), `h2` pour les sections, `h3` pour les cartes | À venir |
+| Hiérarchie des titres | Un seul `h1` par page : le titre de la page (le grand titre sur l'accueil, le nom du commerce dans l'espace commerçant) ; `h2` pour une partie de la page si besoin ; `h3` pour le titre d'une carte | À venir |
 | Images | `alt` descriptif, ou `alt=""` si l'image est décorative | En place |
 
 ## 7. Textes, performances et éco-conception
