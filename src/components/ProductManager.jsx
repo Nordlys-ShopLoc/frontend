@@ -19,6 +19,12 @@ function readableError(err) {
   return err instanceof TypeError ? errorMessage(0) : err.message
 }
 
+function statusBadge(product) {
+  if (!product.available) return { className: 'badge', label: 'Retiré de la vente' }
+  if (product.stock === 0) return { className: 'badge badge-error', label: 'Rupture' }
+  return { className: 'badge badge-success', label: 'En vente' }
+}
+
 // US-S03: the merchant adds, changes and withdraws the articles of her shop
 export default function ProductManager() {
   const [products, setProducts] = useState([])
@@ -28,6 +34,7 @@ export default function ProductManager() {
   const [form, setForm] = useState(EMPTY_FORM)
   const [editingId, setEditingId] = useState(null)
   const [saving, setSaving] = useState(false)
+  const [busyId, setBusyId] = useState(null)
   const [formError, setFormError] = useState('')
   // Goes up after each change to reload the list
   const [version, setVersion] = useState(0)
@@ -96,6 +103,29 @@ export default function ProductManager() {
       setSaving(false)
     }
   }
+
+  async function handleOutOfStock(product) {
+    setMessage('')
+    setError('')
+    setBusyId(product.id)
+
+    try {
+      const response = await apiFetch(`${URL}/${product.id}/out-of-stock`, { method: 'POST' })
+      if (!response.ok) throw new Error(messageFor(response.status))
+      const updated = await response.json()
+
+      setProducts((previous) => previous.map((item) => (item.id === updated.id ? updated : item)))
+      if (editingId === product.id) {
+        setForm((previous) => ({ ...previous, stock: '0' }))
+      }
+      setMessage(`« ${product.name} » est maintenant signalé en rupture de stock.`)
+    } catch (err) {
+      setError(readableError(err))
+    } finally {
+      setBusyId(null)
+    }
+  }
+
 
   async function handleWithdraw(product) {
     if (!window.confirm(`Retirer « ${product.name} » de la vente ? Les clients ne le verront plus.`)) return
@@ -169,27 +199,36 @@ export default function ProductManager() {
         )}
 
         <ul className="list">
-          {products.map((product) => (
-            <li className="list-item product-item" key={product.id}>
-              <div>
-                <p className="list-item-title">{product.name}</p>
-                <p className="muted">{priceFormat.format(product.price)} · Stock : {product.stock}</p>
-                <span className={product.available ? 'badge badge-success' : 'badge'}>
-                  {product.available ? 'En vente' : 'Retiré de la vente'}
-                </span>
-              </div>
-              {product.available && (
-                <div className="btn-row">
-                  <button type="button" className="btn btn-secondary btn-small" onClick={() => startEdit(product)}>
-                    Modifier
-                  </button>
-                  <button type="button" className="btn btn-danger btn-small" onClick={() => handleWithdraw(product)}>
-                    Retirer
-                  </button>
+          {products.map((product) => {
+            const badge = statusBadge(product)
+            return (
+              <li className="list-item product-item" key={product.id}>
+                <div>
+                  <p className="list-item-title">{product.name}</p>
+                  <p className="muted">{priceFormat.format(product.price)} · Stock : {product.stock}</p>
+                  <span className={badge.className}>{badge.label}</span>
                 </div>
-              )}
-            </li>
-          ))}
+                {product.available && (
+                  <div className="btn-row">
+                    <button type="button" className="btn btn-secondary btn-small" onClick={() => startEdit(product)}>
+                      Modifier
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-secondary btn-small"
+                      disabled={product.stock === 0 || busyId === product.id}
+                      onClick={() => handleOutOfStock(product)}
+                    >
+                      {busyId === product.id ? 'Mise à jour...' : 'Signaler en rupture'}
+                    </button>
+                    <button type="button" className="btn btn-danger btn-small" onClick={() => handleWithdraw(product)}>
+                      Retirer
+                    </button>
+                  </div>
+                )}
+              </li>
+            )
+          })}
         </ul>
       </section>
     </>
