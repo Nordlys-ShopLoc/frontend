@@ -47,7 +47,7 @@
 }
 
 .hours-day-summary.closed {
-  opacity: 0.6;
+  color: var(--color-text-secondary);
 }
 
 /* Tablet: two lines of days */
