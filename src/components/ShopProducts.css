@@ -22,10 +22,9 @@
 
 .product-out-of-stock {
   background: var(--color-background);
-  opacity: 0.65;
+  border: 1px solid var(--color-border);
 }
 
 .product-out-of-stock .badge {
   align-self: flex-start;
-  opacity: 1;
 }

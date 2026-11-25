@@ -76,7 +76,10 @@ export default function ShopProducts({ shopId }) {
                 )}
 
                 <p className="product-price">
-                  {Number(product.price).toFixed(2)} €
+                  {new Intl.NumberFormat('fr-FR', {
+                    style: 'currency',
+                    currency: 'EUR',
+                  }).format(product.price)}
                 </p>
 
                 {product.outOfStock && (
