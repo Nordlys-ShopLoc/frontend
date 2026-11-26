@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import { apiFetch, errorMessage } from '../api.js'
+import ShopProducts from '../components/ShopProducts.jsx'
 
 // Detail of a partner shop. Opening hours (US-C05) and articles (US-C07) are added in this page.
 export default function ShopPage() {
@@ -38,6 +39,7 @@ export default function ShopPage() {
           <h1 className="page-title">{shop.name}</h1>
           <p className="page-subtitle">{shop.address}</p>
           {shop.description && <p>{shop.description}</p>}
+          <ShopProducts key={id} shopId={id} />
         </>
       )}
     </section>

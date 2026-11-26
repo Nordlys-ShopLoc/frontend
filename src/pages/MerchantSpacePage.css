@@ -1,0 +1,4 @@
+/* Merchant space: the cards of a same row have the same height */
+.merchant-grid {
+  align-items: stretch;
+}
