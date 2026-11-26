@@ -312,7 +312,9 @@
   flex-wrap: wrap;
   gap: 12px;
 }
-
+.filter-bar {
+  margin-bottom: 24px;
+}
 /* ---------- badges, messages, lists ---------- */
 .badge {
   display: inline-block;
