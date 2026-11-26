@@ -3,6 +3,8 @@ import { apiFetch, errorMessage } from '../api.js'
 import ShopRegistrationForm from '../components/ShopRegistrationForm.jsx'
 import InShopRegistrationForm from '../components/InShopRegistrationForm.jsx'
 import ProductManager from '../components/ProductManager.jsx'
+import OpeningHoursForm from '../components/OpeningHoursForm.jsx'
+import './MerchantSpacePage.css'
 
 const STATUS_LABELS = {
   PENDING: 'En attente de validation par ShopLoc',
@@ -47,10 +49,11 @@ export default function MerchantSpacePage() {
       )}
 
       {/* One line per screen of the merchant space */}
-      <div className="grid">
+      <div className="grid merchant-grid">
         {noShop && <ShopRegistrationForm />}
-        {shop?.status === 'APPROVED' && <ProductManager />}
         <InShopRegistrationForm />
+        {shop?.status === 'APPROVED' && <ProductManager />}
+        {shop?.status === 'APPROVED' && <OpeningHoursForm />}
       </div>
     </section>
   )
